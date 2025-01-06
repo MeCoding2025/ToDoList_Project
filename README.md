@@ -13,7 +13,7 @@ Remember your Tasks.
 
 To run the Programm, just open it through your Browser.
 
-Git Clone 
+Git Clone https://github.com/MeCoding2025/ToDoList_Project.git
 
 Have Fun and don't forget to complete your tasks!
 
