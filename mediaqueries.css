@@ -1,0 +1,60 @@
+@media screen and (max-width: 600px) {
+
+    .container {
+        padding: 7px;
+    }
+
+    .todo-app {
+        margin: 50px auto 20px;
+        padding: 15px 10px 40px;
+    }
+
+    .row {
+        padding-left: 5px;
+    }
+
+    button {
+        padding: 10px 20px;
+    }
+    
+    ul li {
+        font-size: 13px;
+        padding: 12px 25px 12px 50px;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+}
+
+@media screen and (max-width: 350px) {
+
+    .todo-app {
+        margin: 50px auto 20px;
+        padding: 15px 15px 40px;
+    }
+
+    .row {
+        padding-left: 5px;
+    }   
+
+    input {
+        font-weight: 7px;
+    }
+    #input-box {
+        padding: 1px;
+        font-size: 12px;
+    }
+
+    button {
+        padding: 10px 15px;
+        border-radius: 40px;
+        font-size: 12px;
+    }
+
+    
+    ul li {
+        font-size: 13px;
+        padding: 15px 25px 12px 50px;
+        white-space: normal;
+        word-wrap: break-word;
+    }
+}
