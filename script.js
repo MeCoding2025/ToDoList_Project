@@ -123,3 +123,21 @@ listContainer.addEventListener('click', (e) => {
     }
 }, false);
 
+// Service Worker
+self.addEventListener('push', function(event) {
+    const options = {
+        body: event.data ? event.data.text() : 'Default body',
+        icon: './assets/reminder-icon.png',
+    };
+    event.waitUntil(
+        self.registration.showNotification('Task Reminder', options)
+    );
+});
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(function(registration) {
+        console.log('Service Worker registered with scope:', registration.scope);
+    }).catch(function(error) {
+        console.error('Service Worker registration failed:', error);
+    });
+}
+
