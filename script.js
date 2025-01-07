@@ -43,20 +43,25 @@ const requestNotificationPermission = async () => {
     }
 };
 
+// Function to send a message to the service worker
+const sendToServiceWorker = (taskText, delay) => {
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+            type: 'SET_REMINDER',
+            taskText,
+            delay,
+        });
+    } else {
+        console.error('Service Worker not active to handle the message.');
+    }
+};
+
 // Set a reminder for a task
 const setReminder = (taskText, reminderTime) => {
     const reminderInMs = reminderTime * 60 * 1000;
 
-    setTimeout(() => {
-        if (Notification.permission === "granted") {
-            new Notification("Task Reminder", {
-                body: `Reminder: ${taskText}`,
-                icon: "./assets/reminder-icon.png",
-            });
-        } else {
-            swal(`Reminder for "${taskText}" could not be shown because notifications are disabled.`);
-        }
-    }, reminderInMs);
+    // Send to service worker
+    sendToServiceWorker(taskText, reminderInMs);
 
     swal({
         title: "Reminder Set",

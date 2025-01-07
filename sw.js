@@ -28,3 +28,20 @@ self.addEventListener('push', (event) => {
 
     event.waitUntil(self.registration.showNotification(title, options));
 });
+
+self.addEventListener('message', (event) => {
+    if (event.data.type === 'SET_REMINDER') {
+        const { taskText, delay } = event.data;
+        
+        setTimeout(() => {
+            self.registration.showNotification("Task Reminder", {
+                body: `Reminder: ${taskText}`,
+                icon: './assets/reminder-icon.png',
+            });
+        }, delay);
+    }
+});
+
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+});
