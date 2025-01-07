@@ -1,6 +1,23 @@
 const inputBox = document.getElementById('input-box');
 const listContainer = document.getElementById('list-container');
 
+// Function to register the service worker
+const registerServiceWorker = async () => {
+    if ('serviceWorker' in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register('./sw.js');
+            console.log('Service Worker registered with scope:', registration.scope);
+        } catch (error) {
+            console.error('Service Worker registration failed:', error);
+        }
+    } else {
+        console.log('Service Worker is not supported in this browser.');
+    }
+};
+
+// Call the function to register the service worker
+registerServiceWorker();
+
 // Request permission for showing notifications
 const requestNotificationPermission = async () => {
     if (!("Notification" in window)) {
@@ -122,22 +139,3 @@ listContainer.addEventListener('click', (e) => {
         saveData();
     }
 }, false);
-
-// Service Worker
-self.addEventListener('push', function(event) {
-    const options = {
-        body: event.data ? event.data.text() : 'Default body',
-        icon: './assets/reminder-icon.png',
-    };
-    event.waitUntil(
-        self.registration.showNotification('Task Reminder', options)
-    );
-});
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').then(function(registration) {
-        console.log('Service Worker registered with scope:', registration.scope);
-    }).catch(function(error) {
-        console.error('Service Worker registration failed:', error);
-    });
-}
-
